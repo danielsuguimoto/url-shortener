@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>short·ener</title>
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+
+<main class="wrap">
+
+  <section id="login" hidden>
+    <form id="login-form" class="card login-card">
+      <h1 class="mark">short·ener</h1>
+      <p class="sub">Sign in to manage your links.</p>
+      <p id="login-error" class="error" hidden></p>
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" autocomplete="current-password" required autofocus>
+      <button type="submit" class="primary">Sign in</button>
+    </form>
+  </section>
+
+  <section id="app" hidden>
+    <header class="topbar">
+      <h1 class="mark">short·ener</h1>
+      <button id="signout" class="ghost" type="button">Sign out</button>
+    </header>
+
+    <form id="create-form" class="card create">
+      <input type="url" id="create-url" aria-label="Destination URL"
+             placeholder="https://example.com/a/very/long/url" required>
+      <input type="text" id="create-slug" aria-label="Custom slug (optional)"
+             placeholder="slug" pattern="[A-Za-z0-9_\-]{1,64}">
+      <button type="submit" class="primary">Shorten</button>
+      <p id="create-error" class="error" hidden></p>
+    </form>
+
+    <p id="list-error" class="error" hidden></p>
+    <p id="empty" class="empty" hidden>No links yet. Create the first one above.</p>
+
+    <ul id="links" class="links"></ul>
+    <button id="more" class="ghost more" type="button" hidden>Load more</button>
+  </section>
+
+</main>
+
+<template id="link-row">
+  <li class="row">
+    <div class="row-main">
+      <button class="slug" type="button" title="Copy short URL"></button>
+      <span class="arrow">&rarr;</span>
+      <span class="dest"></span>
+    </div>
+    <div class="row-side">
+      <time class="created"></time>
+      <button class="ghost edit" type="button">Edit</button>
+      <button class="ghost delete" type="button">Delete</button>
+    </div>
+  </li>
+</template>
+
+<script src="/app.js" type="module"></script>
+</body>
+</html>

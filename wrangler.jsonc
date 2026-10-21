@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "url-shortener",
+  "main": "src/index.ts",
+  "workers_dev": true,
+  "compatibility_date": "2026-10-19",
+  "compatibility_flags": ["global_fetch_strictly_public"],
+  "kv_namespaces": [
+    { "binding": "LINKS", "id": "83606c9496764896b51e87a72204a3d6" },
+    { "binding": "OAUTH_KV", "id": "f086a7e8614d45e58e0e8eac598cd600" }
+  ],
+  "assets": { "directory": "./public/", "binding": "ASSETS" },
+  "observability": { "enabled": true }
+}

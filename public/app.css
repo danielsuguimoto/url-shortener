@@ -1,0 +1,163 @@
+* { box-sizing: border-box; margin: 0; }
+
+:root {
+  --bg: #0e0f11;
+  --surface: #16181d;
+  --hairline: #262a31;
+  --text: #e8eaed;
+  --muted: #8a919b;
+  --accent: #ffd21f;
+  --danger: #ff5a48;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 48px 20px 80px; }
+
+.mark {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.mark::first-letter { color: var(--accent); }
+
+.sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+}
+
+/* login */
+
+#login { min-height: 60vh; display: grid; place-items: center; }
+#login[hidden] { display: none; }
+.login-card { padding: 28px; width: 100%; max-width: 360px; }
+.login-card label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.login-card input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 15px;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+}
+.login-card input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.login-card .primary { width: 100%; }
+
+.error { color: var(--danger); font-size: 13px; margin-bottom: 12px; }
+
+/* header + create form */
+
+.topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+
+.create { display: flex; gap: 8px; padding: 10px; margin-bottom: 28px; align-items: start; }
+.create input {
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  padding: 9px 11px;
+}
+.create input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+#create-url { flex: 1; min-width: 0; }
+#create-slug { width: 110px; }
+.create .error { flex-basis: 100%; margin: 0; }
+.create { flex-wrap: wrap; }
+
+button {
+  font: inherit;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+.primary {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  padding: 9px 18px;
+}
+.primary:hover { filter: brightness(1.08); }
+.ghost {
+  color: var(--muted);
+  font-size: 13px;
+  padding: 4px 8px;
+}
+.ghost:hover { color: var(--text); }
+.delete:hover { color: var(--danger); }
+
+/* link list */
+
+.empty { color: var(--muted); text-align: center; padding: 48px 0; }
+.links { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+
+.row {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.row-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.slug {
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 2px 0;
+}
+.slug:hover { text-decoration: underline; }
+.slug.copied { color: var(--text); }
+.arrow { color: var(--muted); }
+.dest {
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dest input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--text);
+  font: inherit;
+  padding: 4px 8px;
+}
+.row-side { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.created { color: var(--muted); font-size: 12px; margin-right: 6px; white-space: nowrap; }
+
+.more { display: block; margin: 20px auto 0; }
+
+@media (max-width: 560px) {
+  .create { flex-direction: column; }
+  #create-url, #create-slug { width: 100%; }
+  .create .primary { width: 100%; }
+  .row { flex-direction: column; align-items: stretch; }
+  .row-side { justify-content: flex-end; }
+}
