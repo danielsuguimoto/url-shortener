@@ -1,4 +1,6 @@
+import { CimdFetchError } from '@cloudflare/workers-oauth-provider';
 import { checkPassword, isAuthenticated, issueSessionCookie } from './session';
+import { clientMetadataUnavailable } from './oauth';
 import { consentPage, errorPage, loginPage } from './pages';
 
 function html(body: string, status = 200, headers?: HeadersInit): Response {
@@ -17,6 +19,7 @@ export async function handleAuthorize(request: Request, env: Env): Promise<Respo
     try {
       authRequest = await oauth.parseAuthRequest(request);
     } catch (error) {
+      if (error instanceof CimdFetchError) return clientMetadataUnavailable();
       const message = error instanceof Error ? error.message : 'Invalid authorization request';
       return html(errorPage(message), 400);
     }
@@ -28,6 +31,7 @@ export async function handleAuthorize(request: Request, env: Env): Promise<Respo
       description = await oauth.describeConsent(authRequest);
       transaction = await oauth.beginConsent(authRequest);
     } catch (error) {
+      if (error instanceof CimdFetchError) return clientMetadataUnavailable();
       console.error('OAuth consent setup failed', error);
       return html(errorPage('Unable to process the authorization request.'), 400);
     }
@@ -75,6 +79,7 @@ export async function handleAuthorize(request: Request, env: Env): Promise<Respo
       approved.headers.set('Location', redirectTo);
       return new Response(null, { status: 302, headers: approved.headers });
     } catch (error) {
+      if (error instanceof CimdFetchError) return clientMetadataUnavailable();
       console.error('OAuth consent completion failed', error);
       return html(errorPage('Unable to process the authorization request.'), 400);
     }
